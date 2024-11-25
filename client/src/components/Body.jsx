@@ -119,7 +119,7 @@ const Header = () => {
                 playing
                 muted
                 style={{ pointerEvents: "none" }}
-                width="100%"
+                width="auto"
                 className="mb-12"
                 height="100vh"
               ></ReactPlayer>

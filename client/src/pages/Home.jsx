@@ -1,10 +1,13 @@
 import Body from '../components/Body'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+
 function Home() {
   return (
     <div>
-        <Navbar/>
+      
+       <Navbar/>
+     
         <Body/>
         <Footer/>
     </div>
@@ -12,3 +15,8 @@ function Home() {
 }
 
 export default Home
+
+
+
+
+   
