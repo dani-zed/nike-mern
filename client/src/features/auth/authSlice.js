@@ -1,86 +1,66 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { useState, useEffect } from "react";
 import { checkUser, createUser, loginUser } from "./authAPI";
 
-const initialState = {
-  loggedinUser: null,
-  loginError: null,
-  status: "idle",
-};
+const useAuth = () => {
+  const [loggedinUser, setLoggedinUser] = useState(null);
+  const [loginError, setLoginError] = useState(null);
+  const [status, setStatus] = useState("idle");
 
-export const createUserAsync = createAsyncThunk(
-  "auth/createUser",
-  async (user) => {
-    const response = await createUser(user);
-    return response.data;
-  }
-);
-export const loginUserAsync = createAsyncThunk(
-  "auth/loginUser",
-  async (user, { rejectWithValue }) => {
+  // Function to create a new user
+  const createUserAsync = async (user) => {
+    setStatus("loading");
+    try {
+      const response = await createUser(user);
+      setLoggedinUser(response.data);
+      setStatus("idle");
+    } catch (err) {
+      console.error(err);
+      setLoginError(err);
+      setStatus("idle");
+    }
+  };
+
+  // Function to log in an existing user
+  const loginUserAsync = async (user) => {
+    setStatus("loading");
     try {
       const response = await loginUser(user);
-      return response.data;
+      setLoggedinUser(response.data);
+      setStatus("idle");
     } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
+      console.error(err);
+      setLoginError(err);
+      setStatus("idle");
     }
-  }
-);
-export const checkUserAsync = createAsyncThunk("auth/checkUser", async () => {
-  const response = await checkUser();
-  return response.data;
-});
+  };
 
-export const counterSlice = createSlice({
-  name: "counter",
-  initialState,
+  // Function to check if a user is logged in
+  const checkUserAsync = async () => {
+    setStatus("loading");
+    try {
+      const response = await checkUser();
+      setLoggedinUser(response.data);
+      setStatus("idle");
+    } catch (err) {
+      console.error(err);
+      setLoginError(err);
+      setStatus("idle");
+    }
+  };
 
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
+  // UseEffect to check if the user is logged in when the component mounts
+  useEffect(() => {
+    checkUserAsync();
+  }, []);
 
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
-    },
-  },
+  return {
+    loggedinUser,
+    loginError,
+    status,
+    createUserAsync,
+    loginUserAsync,
+    checkUserAsync,
+  };
+};
 
-  extraReducers: (builder) => {
-    builder
-      .addCase(createUserAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(createUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedinUser = action.payload;
-      })
-      .addCase(loginUserAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(loginUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedinUser = action.payload;
-      })
-      .addCase(loginUserAsync.rejected, (state, action) => {
-        state.status = "idle";
-        state.loginError = action.payload;
-      })
-      .addCase(checkUserAsync.pending, (state, action) => {
-        state.status = "idle";
-      })
-      .addCase(checkUserAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.loggedinUser = action.payload;
-      });
-  },
-});
-
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-
-export const selectLogginUser = (state) => state.auth.loggedinUser;
-export const selectLogginError = (state) => state.auth.loginError;
-
-export default counterSlice.reducer;
+export default useAuth;

@@ -349,7 +349,7 @@ const Header = () => {
               className="text-lg font-Oswald "
               onClick={() => setShowKids((show) => !show)}
             >
-              Kids'
+              Kids
             </h2>
             <div
               className={`fourthOptions my-3 mx-6 space-y-2 opacity-50 ${

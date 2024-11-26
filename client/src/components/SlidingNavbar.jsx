@@ -7,34 +7,35 @@ import Bag from "../assets/bag.png";
 import Box from "../assets/box.png";
 import Store from "../assets/store.png";
 import Question from "../assets/question.png";
+import { Link } from "react-router-dom";
 
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
+// const products = [
+//   {
+//     id: 1,
+//     name: "Throwback Hip Bag",
+//     href: "#",
+//     color: "Salmon",
+//     price: "$90.00",
+//     quantity: 1,
+//     imageSrc:
+//       "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
+//     imageAlt:
+//       "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
+//   },
+//   {
+//     id: 2,
+//     name: "Medium Stuff Satchel",
+//     href: "#",
+//     color: "Blue",
+//     price: "$32.00",
+//     quantity: 1,
+//     imageSrc:
+//       "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+//     imageAlt:
+//       "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+//   },
+//   // More products...
+// ];
 export default function SlidingNavbar({ open, setOpen }) {
   const [user, setUser] = useState(false);
   return (
@@ -87,57 +88,39 @@ export default function SlidingNavbar({ open, setOpen }) {
                           <ul
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
-                          >
-                            <div className="first space-y-4">
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">New & Featured</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">Mens</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">Womens</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">Kids</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">Sale</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                              <div className="section-1 flex justify-between items-center">
-                                <h1 className="text-2xl">SNKRS</h1>
-                                <img
-                                  className="w-4 h-4 opacity-50"
-                                  src={rightArrow}
-                                  alt=""
-                                />
-                              </div>
-                            </div>
+                          ><div className="first space-y-4">
+                          <div className="section-1 flex justify-between items-center">
+                            <Link to="/men" className="flex items-center justify-between w-full">
+                              <h1 className="text-2xl">Men</h1>
+                              <img className="w-4 h-4 opacity-50" src={rightArrow} alt="" />
+                            </Link>
+                          </div>
+                          <div className="section-1 flex justify-between items-center">
+                            <Link to="/women" className="flex items-center justify-between w-full">
+                              <h1 className="text-2xl">Women</h1>
+                              <img className="w-4 h-4 opacity-50" src={rightArrow} alt="" />
+                            </Link>
+                          </div>
+                          <div className="section-1 flex justify-between items-center">
+                            <Link to="/kids" className="flex items-center justify-between w-full">
+                              <h1 className="text-2xl">Kids</h1>
+                              <img className="w-4 h-4 opacity-50" src={rightArrow} alt="" />
+                            </Link>
+                          </div>
+                          <div className="section-1 flex justify-between items-center">
+                            <Link to="/sale" className="flex items-center justify-between w-full">
+                              <h1 className="text-2xl">Sale</h1>
+                              <img className="w-4 h-4 opacity-50" src={rightArrow} alt="" />
+                            </Link>
+                          </div>
+                          <div className="section-1 flex justify-between items-center">
+                            <Link to="/snkrs" className="flex items-center justify-between w-full">
+                              <h1 className="text-2xl">SNKRS</h1>
+                              <img className="w-4 h-4 opacity-50" src={rightArrow} alt="" />
+                            </Link>
+                          </div>
+                        </div>
+                            <Link to='/jordan'>
                             <div className="second pt-8 pb-10 flex justify-start">
                               <svg
                                 height="24px"
@@ -150,6 +133,7 @@ export default function SlidingNavbar({ open, setOpen }) {
                               </svg>
                               <h4 className="text-lg font-bold">Jordan</h4>
                             </div>
+                            </Link>
                             <div
                               className={`third ${user ? "hidden" : "block"}`}
                             >
@@ -245,3 +229,7 @@ export default function SlidingNavbar({ open, setOpen }) {
     </Transition.Root>
   );
 }
+
+
+
+

@@ -51,7 +51,7 @@ const Login = () => {
                   {...register("email", {
                     required: "Email required",
                     pattern: {
-                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                      value: /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi,
                       message: "Email is not valid",
                     },
                   })}
@@ -103,7 +103,7 @@ const Login = () => {
 
             {/* Privacy and Terms text */}
             <p className="text-xs tracking-wider text-center opacity-75">
-              By logging in, you agree to Nike's{" "}
+              By logging in, you agree to Nikes{" "}
               <span className="underline">Privacy Policy</span> and
               <span className="underline"> Terms of Use</span>.
             </p>

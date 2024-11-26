@@ -4,12 +4,12 @@ const port = 8080;
 const mongoose = require("mongoose");
 const passport = require("passport");
 const bodyParser = require("body-parser");
-// const productRouter = require("./routes/Product");
-// const colorsRouter = require("./routes/Color");
-// const sizesRouter = require("./routes/Size");
-// const categoriesRouter = require("./routes/Category");
-// const authRouter = require("./routes/Auth");
-// const cartRouter = require("./routes/Cart");
+const productRouter = require("./routes/Product");
+const colorsRouter = require("./routes/Color");
+const sizesRouter = require("./routes/Size");
+const categoriesRouter = require("./routes/Category");
+const authRouter = require("./routes/Auth");
+const cartRouter = require("./routes/Cart");
 const { User } = require("./models/User");
 const {
   sanitizeUser,
@@ -35,12 +35,12 @@ opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = "hello";
 server.use(cookieParser());
 server.use(bodyParser.json());
-// server.use("/products", productRouter.router);
-// server.use("/colors", colorsRouter.router);
-// server.use("/sizes", sizesRouter.router);
-// server.use("/categories", categoriesRouter.router);
-// server.use("/auth", authRouter.router);
-// server.use("/cart", isAuth(), cartRouter.router);
+server.use("/products", productRouter.router);
+server.use("/colors", colorsRouter.router);
+server.use("/sizes", sizesRouter.router);
+server.use("/categories", categoriesRouter.router);
+server.use("/auth", authRouter.router);
+server.use("/cart", isAuth(), cartRouter.router);
 
 passport.use(
   "Local",

@@ -1,62 +1,85 @@
-export function createProduct(product) {
-  return new Promise(async (resolve) => {
-    console.log(product);
-    const response = await fetch("products/createProduct", {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: { "content-type": "application/json" },
+import axios from "axios";
+
+// Create product function
+export async function createProduct(product) {
+  try {
+    const response = await axios.post("products/createProduct", product, {
+      headers: { "Content-Type": "application/json" },
     });
-    const data = await response.json();
-    resolve({ data });
-  });
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error creating product:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }
 
-export function fetchProduct(filter, sort) {
-  return new Promise(async (resolve) => {
+// Fetch products function with filter and sort
+export async function fetchProduct(filter, sort) {
+  try {
     let queryString = "";
-    //Query building for the filter
+
+    // Query building for the filter
     for (let key in filter) {
       if (filter[key].length) {
         queryString += `${key}=${filter[key]}&`;
       }
     }
-    //Query building for the sort
+
+    // Query building for the sort
     for (let key in sort) {
       queryString += `${key}=${sort[key]}&`;
     }
 
-    const response = await fetch("products/fetchProducts?" + queryString);
-    const data = await response.json();
-    resolve({ data });
-  });
+    const response = await axios.get("products/fetchProducts", {
+      params: { query: queryString },
+    });
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }
 
-export function fetchProductById(id) {
-  return new Promise(async (resolve) => {
-    const response = await fetch(`/products/fetchProductById/${id}`);
-    const data = await response.json();
-    resolve({ data });
-  });
+// Fetch product by ID
+export async function fetchProductById(id) {
+  try {
+    const response = await axios.get(`/products/fetchProductById/${id}`);
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error fetching product by ID:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }
 
-export function fetchColors() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("/colors");
-    const data = await response.json();
-    resolve({ data });
-  });
+// Fetch colors
+export async function fetchColors() {
+  try {
+    const response = await axios.get("/colors");
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error fetching colors:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }
-export function fetchSizes() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("/sizes");
-    const data = await response.json();
-    resolve({ data });
-  });
+
+// Fetch sizes
+export async function fetchSizes() {
+  try {
+    const response = await axios.get("/sizes");
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error fetching sizes:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }
-export function fetchCategories() {
-  return new Promise(async (resolve) => {
-    const response = await fetch("/categories");
-    const data = await response.json();
-    resolve({ data });
-  });
+
+// Fetch categories
+export async function fetchCategories() {
+  try {
+    const response = await axios.get("/categories");
+    return { data: response.data }; // Returning the response data directly
+  } catch (err) {
+    console.error("Error fetching categories:", err);
+    throw err; // Throwing error to be handled by the calling code
+  }
 }

@@ -9,5 +9,5 @@ export default {
       oswald: ['Oswald', 'sans-serif'],
     },},
   },
-  plugins: [],
+  plugins: [('@tailwindcss/forms')],
 }
